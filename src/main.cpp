@@ -26,7 +26,37 @@ string binaryToHex (const string& strNumber);
 
 int main () {
 
-  cout << "Hello World" << endl;
+  char hexDigit;
+  cout << "Enter Hex Digit: ";
+  cin >> hexDigit;
+
+  cout << "Corresponding Int: " << hexCharToInt (hexDigit) << endl;
   
   return EXIT_SUCCESS;
+}
+
+/**************************************************************************
+ Function: 	 	hexCharToInt
+
+ Description: Turns a char in hexidecimal form to an int in decimal form
+
+ Parameters:	hexDigit - a char in hexidecimal form
+
+ Returned:	 	The equivlent int in decimal form
+ *************************************************************************/
+int hexCharToInt (char hexDigit){
+  const char LOWEST_INTEGER = '0', HIGHEST_INTEGER = '9',
+             LOWEST_HEX_CHAR = 'A';
+  const int HEX_CHAR_OFFSET = 10;
+  int equivalentInt;
+
+  if (hexDigit >= LOWEST_INTEGER && hexDigit <= HIGHEST_INTEGER){
+    equivalentInt = static_cast<int> (hexDigit - LOWEST_INTEGER);
+  }
+  else {
+    equivalentInt = static_cast<int> (hexDigit - LOWEST_HEX_CHAR) + 
+                    HEX_CHAR_OFFSET;
+  }
+
+  return equivalentInt;
 }
