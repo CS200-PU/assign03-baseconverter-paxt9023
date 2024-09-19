@@ -34,8 +34,7 @@ int main () {
   cout << "Corresponding Int: " << hexCharToInt (hexDigit) << endl;
 
   string strNumber;
-  cout << "Enter a number: ";
-  cin >> strNumber;
+  strNumber = getNumber ("Enter a number: ");
   cout << "Base of your number: " << getBase (strNumber) << endl;
   
   return EXIT_SUCCESS;
@@ -98,4 +97,21 @@ char getBase (const string& strNumber){
   }
 
   return numberBase;
+}
+
+/**************************************************************************
+ Function: 	 	getNumber
+
+ Description: Ask the user for a number and return it in string form
+
+ Parameters:	prompt - the prompt to output to the user in string form
+
+ Returned:	 	The number the user inputted in string form
+ *************************************************************************/
+string getNumber (const string& prompt){
+  string strNumber;
+  cout << prompt;
+  cin >> strNumber;
+
+  return strNumber;
 }
