@@ -10,6 +10,7 @@
 //******************************************************************************
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -59,4 +60,37 @@ int hexCharToInt (char hexDigit){
   }
 
   return equivalentInt;
+}
+
+/**************************************************************************
+ Function: 	 	getBase
+
+ Description: Return the base of the given number's representation
+
+ Parameters:	strNumber - a number in the form of hex, binary, or decimal
+
+ Returned:	 	The base of the number representaion in the form of a char
+ *************************************************************************/
+char getBase (const string& strNumber){
+  const char DECIMAL_BASE = 'D', HEX_BASE = 'H', BINARY_BASE = 'B',
+             HEX_INDICATOR = 'x', BINARY_INDICATOR = 'b';
+  const int INDICATOR_INDEX = 1;
+  char numberBase;
+
+  if (strNumber.length () > 2){
+    if (strNumber.at (INDICATOR_INDEX) == HEX_INDICATOR){
+      numberBase = HEX_BASE;
+    }
+    if (strNumber.at (INDICATOR_INDEX) == BINARY_INDICATOR){
+      numberBase = BINARY_BASE;
+    }
+    else {
+      numberBase = DECIMAL_BASE;
+    }
+  }
+  else {
+    numberBase = DECIMAL_BASE;
+  }
+
+  return numberBase;
 }
