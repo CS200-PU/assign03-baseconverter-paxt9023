@@ -13,6 +13,17 @@
 
 using namespace std;
 
+int hexCharToInt (char hexDigit);
+char getBase (const string& strNumber);
+string getNumber (const string& prompt);
+void printTitle (const string& myTitle);
+string binaryToDecimal (const string& strNumber);
+string decimalToBinary (const string& strNumber);
+string decimalToHex (const string& strNumber);
+string hexToDecimal (const string& strNumber);
+string hexToBinary (const string& strNumber);
+string binaryToHex (const string& strNumber);
+
 int main () {
 
   cout << "Hello World" << endl;
