@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -26,6 +27,10 @@ string hexToBinary (const string& strNumber);
 string binaryToHex (const string& strNumber);
 
 int main () {
+
+  string myTitle = "HEX-DECIMAL-BINARY CONVERTER";
+  printTitle (myTitle);
+  cout << endl;
 
   char hexDigit;
   cout << "Enter Hex Digit: ";
@@ -114,4 +119,25 @@ string getNumber (const string& prompt){
   cin >> strNumber;
 
   return strNumber;
+}
+
+/**************************************************************************
+ Function: 	 	printTitle
+
+ Description: Prints the given title surrounded by asterisks
+
+ Parameters:	myTitle - the title to print out
+
+ Returned:	 	None
+ *************************************************************************/
+void printTitle (const string& myTitle){
+  const int NUMBER_OF_SYMBOLS = 5, DOUBLE_SYMBOLS = NUMBER_OF_SYMBOLS * 2;
+  const char SYMBOL = '*';
+
+
+  cout << setfill (SYMBOL) << setw (myTitle.length () + (DOUBLE_SYMBOLS))
+       << SYMBOL << endl;
+  cout << setw (myTitle.length () + NUMBER_OF_SYMBOLS) << myTitle
+       << setw (NUMBER_OF_SYMBOLS) << SYMBOL << endl;
+  cout << setw (myTitle.length () + (DOUBLE_SYMBOLS)) << SYMBOL;
 }
