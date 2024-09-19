@@ -32,6 +32,11 @@ int main () {
   cin >> hexDigit;
 
   cout << "Corresponding Int: " << hexCharToInt (hexDigit) << endl;
+
+  string strNumber;
+  cout << "Enter a number: ";
+  cin >> strNumber;
+  cout << "Base of your number: " << getBase (strNumber) << endl;
   
   return EXIT_SUCCESS;
 }
@@ -81,7 +86,7 @@ char getBase (const string& strNumber){
     if (strNumber.at (INDICATOR_INDEX) == HEX_INDICATOR){
       numberBase = HEX_BASE;
     }
-    if (strNumber.at (INDICATOR_INDEX) == BINARY_INDICATOR){
+    else if (strNumber.at (INDICATOR_INDEX) == BINARY_INDICATOR){
       numberBase = BINARY_BASE;
     }
     else {
