@@ -12,8 +12,11 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <cmath>
 
 using namespace std;
+
+const int LAST_NUMBER_INDEX = 2;
 
 int hexCharToInt (char hexDigit);
 char getBase (const string& strNumber);
@@ -41,6 +44,10 @@ int main () {
   string strNumber;
   strNumber = getNumber ("Enter a number: ");
   cout << "Base of your number: " << getBase (strNumber) << endl;
+
+  if (getBase (strNumber) == 'B'){
+    cout << "Decimal Representation: " << binaryToDecimal (strNumber) << endl;
+  }
   
   return EXIT_SUCCESS;
 }
@@ -58,6 +65,7 @@ int hexCharToInt (char hexDigit){
   const char LOWEST_INTEGER = '0', HIGHEST_INTEGER = '9',
              LOWEST_HEX_CHAR = 'A';
   const int HEX_CHAR_OFFSET = 10;
+
   int equivalentInt;
 
   if (hexDigit >= LOWEST_INTEGER && hexDigit <= HIGHEST_INTEGER){
@@ -84,6 +92,7 @@ char getBase (const string& strNumber){
   const char DECIMAL_BASE = 'D', HEX_BASE = 'H', BINARY_BASE = 'B',
              HEX_INDICATOR = 'x', BINARY_INDICATOR = 'b';
   const int INDICATOR_INDEX = 1;
+
   char numberBase;
 
   if (strNumber.length () > 2){
@@ -140,4 +149,28 @@ void printTitle (const string& myTitle){
   cout << setw (myTitle.length () + NUMBER_OF_SYMBOLS) << myTitle
        << setw (NUMBER_OF_SYMBOLS) << SYMBOL << endl;
   cout << setw (myTitle.length () + (DOUBLE_SYMBOLS)) << SYMBOL;
+}
+
+/**************************************************************************
+ Function: 	 	binaryToDecimal
+
+ Description: Convert binary number to its equivalent decimal representation
+
+ Parameters:	strNumber - a binary number in string form
+
+ Returned:	 	Returns the equivalent decimal representation in string form
+ *************************************************************************/
+string binaryToDecimal (const string& strNumber){
+  const char BINARY_ONE = '1';
+  const int BASE_TWO = 2, FIRST_NUMBER_INDEX = strNumber.length () - 1;
+
+  int equivalentDecimal = 0;
+
+  for (int i = FIRST_NUMBER_INDEX; i >= LAST_NUMBER_INDEX; i--){
+    if (strNumber.at (i) == BINARY_ONE){
+      equivalentDecimal += pow (BASE_TWO, FIRST_NUMBER_INDEX - i);
+    }
+  }
+
+  return to_string (equivalentDecimal);
 }
