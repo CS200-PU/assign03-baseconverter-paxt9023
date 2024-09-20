@@ -6,17 +6,19 @@
 // Assignment:  Base Converter
 // Purpose:     Convert a given number in a specifc base to equivalent
 //              numbers in the other two bases
-// Hours:       0.25
+// Hours:       4.5
 //******************************************************************************
 
 #include <iostream>
 #include <string>
 #include <iomanip>
 #include <cmath>
+#include <algorithm>
 
 using namespace std;
 
-const int LAST_NUMBER_INDEX = 2;
+const char DECIMAL_BASE = 'D', HEX_BASE = 'H', BINARY_BASE = 'B';
+const int LAST_NUMBER_INDEX = 2, BASE_TWO = 2;
 
 int hexCharToInt (char hexDigit);
 char getBase (const string& strNumber);
@@ -45,8 +47,11 @@ int main () {
   strNumber = getNumber ("Enter a number: ");
   cout << "Base of your number: " << getBase (strNumber) << endl;
 
-  if (getBase (strNumber) == 'B'){
+  if (getBase (strNumber) == BINARY_BASE){
     cout << "Decimal Representation: " << binaryToDecimal (strNumber) << endl;
+  }
+  if (getBase (strNumber) == DECIMAL_BASE){
+    cout << "Binary Representation: " << decimalToBinary (strNumber) << endl;
   }
   
   return EXIT_SUCCESS;
@@ -89,8 +94,7 @@ int hexCharToInt (char hexDigit){
  Returned:	 	The base of the number representaion in the form of a char
  *************************************************************************/
 char getBase (const string& strNumber){
-  const char DECIMAL_BASE = 'D', HEX_BASE = 'H', BINARY_BASE = 'B',
-             HEX_INDICATOR = 'x', BINARY_INDICATOR = 'b';
+  const char HEX_INDICATOR = 'x', BINARY_INDICATOR = 'b';
   const int INDICATOR_INDEX = 1;
 
   char numberBase;
@@ -162,7 +166,7 @@ void printTitle (const string& myTitle){
  *************************************************************************/
 string binaryToDecimal (const string& strNumber){
   const char BINARY_ONE = '1';
-  const int BASE_TWO = 2, FIRST_NUMBER_INDEX = strNumber.length () - 1;
+  const int FIRST_NUMBER_INDEX = strNumber.length () - 1;
 
   int equivalentDecimal = 0;
 
@@ -173,4 +177,28 @@ string binaryToDecimal (const string& strNumber){
   }
 
   return to_string (equivalentDecimal);
+}
+
+/**************************************************************************
+ Function: 	 	decimalToBinary
+
+ Description: Convert decimal number to its equivalent binary representation
+
+ Parameters:	strNumber - a decimal number in string form
+
+ Returned:	 	Returns the equivalent binary representation in string form
+ *************************************************************************/
+string decimalToBinary (const string& strNumber){
+  string equivalentBinary = "";
+  int decimal = stoi (strNumber), quotient, remainder;
+
+  do{
+    quotient = decimal / BASE_TWO;
+    remainder = decimal % BASE_TWO;
+    equivalentBinary += to_string (remainder);
+  } while (quotient != 0);
+
+  reverse (equivalentBinary.begin (), equivalentBinary.end ());
+
+  return equivalentBinary;
 }
