@@ -17,6 +17,7 @@
 
 using namespace std;
 
+const string BINARY_PREFIX = "0b", HEX_PREFIX = "0x";
 const char DECIMAL_BASE = 'D', HEX_BASE = 'H', BINARY_BASE = 'B';
 const int LAST_NUMBER_INDEX = 2, BASE_TWO = 2;
 
@@ -36,12 +37,6 @@ int main () {
   string myTitle = "HEX-DECIMAL-BINARY CONVERTER";
   printTitle (myTitle);
   cout << endl;
-
-  char hexDigit;
-  cout << "Enter Hex Digit: ";
-  cin >> hexDigit;
-
-  cout << "Corresponding Int: " << hexCharToInt (hexDigit) << endl;
 
   string strNumber;
   strNumber = getNumber ("Enter a number: ");
@@ -196,9 +191,10 @@ string decimalToBinary (const string& strNumber){
     quotient = decimal / BASE_TWO;
     remainder = decimal % BASE_TWO;
     equivalentBinary += to_string (remainder);
-  } while (quotient != 0);
+    decimal = quotient;
+  } while (decimal != 0);
 
   reverse (equivalentBinary.begin (), equivalentBinary.end ());
 
-  return equivalentBinary;
+  return BINARY_PREFIX + equivalentBinary;
 }
