@@ -19,9 +19,10 @@ using namespace std;
 
 const string BINARY_PREFIX = "0b", HEX_PREFIX = "0x";
 const char DECIMAL_BASE = 'D', HEX_BASE = 'H', BINARY_BASE = 'B';
-const int LAST_NUMBER_INDEX = 2, BASE_TWO = 2;
+const int LAST_NUMBER_INDEX = 2, BASE_TWO = 2, BASE_SIXTEEN = 16;
 
 int hexCharToInt (char hexDigit);
+char intToHexChar (int intDigit);
 char getBase (const string& strNumber);
 string getNumber (const string& prompt);
 void printTitle (const string& myTitle);
@@ -47,6 +48,7 @@ int main () {
   }
   if (getBase (strNumber) == DECIMAL_BASE){
     cout << "Binary Representation: " << decimalToBinary (strNumber) << endl;
+    cout << "Hexadecimal Representation: " << decimalToHex (strNumber) << endl;
   }
   
   return EXIT_SUCCESS;
@@ -77,6 +79,29 @@ int hexCharToInt (char hexDigit){
   }
 
   return equivalentInt;
+}
+
+/**************************************************************************
+ Function: 	 	intToHexChar
+
+ Description: Turns a an int in decimal form to a char in hex form
+
+ Parameters:	intDigit - an int in decimal form
+
+ Returned:	 	The equivlent char in hex form
+ *************************************************************************/
+char intToHexChar (int intDigit){
+  const int LAST_INT = 9, ONE_DIGIT_INT_OFFSET = 48,
+            DOUBLE_DIGIT_INT_OFFSET = 55;
+  char equivalentHex;
+  if (intDigit > LAST_INT){
+    equivalentHex = static_cast<char> (intDigit + DOUBLE_DIGIT_INT_OFFSET);
+  }
+  else {
+    equivalentHex = static_cast<char> (intDigit + ONE_DIGIT_INT_OFFSET);
+  }
+
+  return equivalentHex;
 }
 
 /**************************************************************************
@@ -197,4 +222,29 @@ string decimalToBinary (const string& strNumber){
   reverse (equivalentBinary.begin (), equivalentBinary.end ());
 
   return BINARY_PREFIX + equivalentBinary;
+}
+
+/**************************************************************************
+ Function: 	 	decimalToHex
+
+ Description: Convert decimal number to its equivalent hex representation
+
+ Parameters:	strNumber - a decimal number in string form
+
+ Returned:	 	Returns the equivalent hex representation in string form
+ *************************************************************************/
+string decimalToHex (const string& strNumber){
+  string equivalentHex = "";
+  int decimal = stoi (strNumber), quotient, remainder;
+
+  do{
+    quotient = decimal / BASE_SIXTEEN;
+    remainder = decimal % BASE_SIXTEEN;
+    equivalentHex += intToHexChar (remainder);
+    decimal = quotient;
+  } while (decimal != 0);
+
+  reverse (equivalentHex.begin (), equivalentHex.end ());
+
+  return HEX_PREFIX + equivalentHex;
 }
