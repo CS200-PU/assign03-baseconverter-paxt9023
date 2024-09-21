@@ -111,7 +111,9 @@ int hexCharToInt (char hexDigit){
 char intToHexChar (int intDigit){
   const int LAST_INT = 9, ONE_DIGIT_INT_OFFSET = 48,
             DOUBLE_DIGIT_INT_OFFSET = 55;
+
   char equivalentHex;
+
   if (intDigit > LAST_INT){
     equivalentHex = static_cast<char> (intDigit + DOUBLE_DIGIT_INT_OFFSET);
   }
@@ -133,11 +135,11 @@ char intToHexChar (int intDigit){
  *************************************************************************/
 char getBase (const string& strNumber){
   const char HEX_INDICATOR = 'x', BINARY_INDICATOR = 'b';
-  const int INDICATOR_INDEX = 1;
+  const int INDICATOR_INDEX = 1, MIN_HEX_OR_BINARY_SIZE = 3;
 
   char numberBase;
 
-  if (strNumber.length () > 2){
+  if (strNumber.length () >= MIN_HEX_OR_BINARY_SIZE){
     if (strNumber.at (INDICATOR_INDEX) == HEX_INDICATOR){
       numberBase = HEX_BASE;
     }
@@ -166,6 +168,7 @@ char getBase (const string& strNumber){
  *************************************************************************/
 string getNumber (const string& prompt){
   string strNumber;
+
   cout << prompt;
   cin >> strNumber;
 
@@ -229,7 +232,7 @@ string binaryToDecimal (const string& strNumber){
  Returned:	 	Returns the equivalent binary representation in string form
  *************************************************************************/
 string decimalToBinary (const string& strNumber){
-  string equivalentBinary = "";
+  string equivalentBinary;
   int decimal = stoi (strNumber), quotient, remainder;
 
   do{
@@ -254,7 +257,7 @@ string decimalToBinary (const string& strNumber){
  Returned:	 	Returns the equivalent hex representation in string form
  *************************************************************************/
 string decimalToHex (const string& strNumber){
-  string equivalentHex = "";
+  string equivalentHex;
   int decimal = stoi (strNumber), quotient, remainder;
 
   do{
@@ -280,6 +283,7 @@ string decimalToHex (const string& strNumber){
  *************************************************************************/
 string hexToDecimal (const string& strNumber){
   const int FIRST_NUMBER_INDEX = strNumber.length () - 1;
+  
   int equivalentDecimal = 0;
 
   for (int i = FIRST_NUMBER_INDEX; i >= LAST_NUMBER_INDEX; i--){
