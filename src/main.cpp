@@ -50,6 +50,9 @@ int main () {
     cout << "Binary Representation: " << decimalToBinary (strNumber) << endl;
     cout << "Hexadecimal Representation: " << decimalToHex (strNumber) << endl;
   }
+  if (getBase (strNumber) == HEX_BASE){
+    cout << "Decimal Representation: " << hexToDecimal (strNumber) << endl;
+  }
   
   return EXIT_SUCCESS;
 }
@@ -57,9 +60,9 @@ int main () {
 /**************************************************************************
  Function: 	 	hexCharToInt
 
- Description: Turns a char in hexidecimal form to an int in decimal form
+ Description: Turns a char in hexadecimal form to an int in decimal form
 
- Parameters:	hexDigit - a char in hexidecimal form
+ Parameters:	hexDigit - a char in hexadecimal form
 
  Returned:	 	The equivlent int in decimal form
  *************************************************************************/
@@ -84,7 +87,7 @@ int hexCharToInt (char hexDigit){
 /**************************************************************************
  Function: 	 	intToHexChar
 
- Description: Turns a an int in decimal form to a char in hex form
+ Description: Turns an int in decimal form to a char in hex form
 
  Parameters:	intDigit - an int in decimal form
 
@@ -178,7 +181,8 @@ void printTitle (const string& myTitle){
 /**************************************************************************
  Function: 	 	binaryToDecimal
 
- Description: Convert binary number to its equivalent decimal representation
+ Description: Convert a binary number to its equivalent
+              decimal representation
 
  Parameters:	strNumber - a binary number in string form
 
@@ -202,7 +206,8 @@ string binaryToDecimal (const string& strNumber){
 /**************************************************************************
  Function: 	 	decimalToBinary
 
- Description: Convert decimal number to its equivalent binary representation
+ Description: Convert a decimal number to its equivalent
+              binary representation
 
  Parameters:	strNumber - a decimal number in string form
 
@@ -227,7 +232,7 @@ string decimalToBinary (const string& strNumber){
 /**************************************************************************
  Function: 	 	decimalToHex
 
- Description: Convert decimal number to its equivalent hex representation
+ Description: Convert a decimal number to its equivalent hex representation
 
  Parameters:	strNumber - a decimal number in string form
 
@@ -247,4 +252,25 @@ string decimalToHex (const string& strNumber){
   reverse (equivalentHex.begin (), equivalentHex.end ());
 
   return HEX_PREFIX + equivalentHex;
+}
+
+/**************************************************************************
+ Function: 	 	hexToDecimal
+
+ Description: Convert a hex number to its equivalent decimal representation
+
+ Parameters:	strNumber - a hex number in string form
+
+ Returned:	 	Returns the equivalent decimal representation in string form
+ *************************************************************************/
+string hexToDecimal (const string& strNumber){
+  const int FIRST_NUMBER_INDEX = strNumber.length () - 1;
+  int equivalentDecimal = 0;
+
+  for (int i = FIRST_NUMBER_INDEX; i >= LAST_NUMBER_INDEX; i--){
+      equivalentDecimal += hexCharToInt (strNumber.at (i)) * 
+                           pow (BASE_SIXTEEN, FIRST_NUMBER_INDEX - i);
+  }
+
+  return to_string (equivalentDecimal);
 }
