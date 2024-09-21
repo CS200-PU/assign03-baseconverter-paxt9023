@@ -45,6 +45,7 @@ int main () {
 
   if (getBase (strNumber) == BINARY_BASE){
     cout << "Decimal Representation: " << binaryToDecimal (strNumber) << endl;
+    cout << "Hexadecimal Representation: " << binaryToHex (strNumber) << endl;
   }
   if (getBase (strNumber) == DECIMAL_BASE){
     cout << "Binary Representation: " << decimalToBinary (strNumber) << endl;
@@ -52,6 +53,7 @@ int main () {
   }
   if (getBase (strNumber) == HEX_BASE){
     cout << "Decimal Representation: " << hexToDecimal (strNumber) << endl;
+    cout << "Binary Representation: " << hexToBinary (strNumber) << endl;
   }
   
   return EXIT_SUCCESS;
@@ -273,4 +275,30 @@ string hexToDecimal (const string& strNumber){
   }
 
   return to_string (equivalentDecimal);
+}
+
+/**************************************************************************
+ Function: 	 	hexToBinary
+
+ Description: Convert a hex number to its equivalent binary representation
+
+ Parameters:	strNumber - a hex number in string form
+
+ Returned:	 	Returns the equivalent binary representation in string form
+ *************************************************************************/
+string hexToBinary (const string& strNumber){
+  return decimalToBinary (hexToDecimal (strNumber));
+}
+
+/**************************************************************************
+ Function: 	 	binaryToHex
+
+ Description: Convert a binary number to its equivalent hex representation
+
+ Parameters:	strNumber - a binary number in string form
+
+ Returned:	 	Returns the equivalent hex representation in string form
+ *************************************************************************/
+string binaryToHex (const string& strNumber){
+  return decimalToHex (binaryToDecimal (strNumber));
 }
