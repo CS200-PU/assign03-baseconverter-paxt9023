@@ -1,12 +1,12 @@
 //******************************************************************************
 // File name:   main.cpp
 // Author:      Erick Paxtian
-// Date:        09/18/24
+// Date:        09/20/24
 // Class:       CS200-01
 // Assignment:  Base Converter
 // Purpose:     Convert a given number in a specifc base to equivalent
 //              numbers in the other two bases
-// Hours:       4.5
+// Hours:       7
 //******************************************************************************
 
 #include <iostream>
@@ -34,26 +34,39 @@ string hexToBinary (const string& strNumber);
 string binaryToHex (const string& strNumber);
 
 int main () {
-
-  string myTitle = "HEX-DECIMAL-BINARY CONVERTER";
-  printTitle (myTitle);
+  const string QUIT = "q", HEADER = "HEX-DECIMAL-BINARY CONVERTER",
+               USER_PROMPT = "Enter your string to convert (q to quit): ";
+  
+  printTitle (HEADER);
   cout << endl;
 
   string strNumber;
-  strNumber = getNumber ("Enter a number: ");
-  cout << "Base of your number: " << getBase (strNumber) << endl;
+  strNumber = getNumber (USER_PROMPT);
 
-  if (getBase (strNumber) == BINARY_BASE){
-    cout << "Decimal Representation: " << binaryToDecimal (strNumber) << endl;
-    cout << "Hexadecimal Representation: " << binaryToHex (strNumber) << endl;
-  }
-  if (getBase (strNumber) == DECIMAL_BASE){
-    cout << "Binary Representation: " << decimalToBinary (strNumber) << endl;
-    cout << "Hexadecimal Representation: " << decimalToHex (strNumber) << endl;
-  }
-  if (getBase (strNumber) == HEX_BASE){
-    cout << "Decimal Representation: " << hexToDecimal (strNumber) << endl;
-    cout << "Binary Representation: " << hexToBinary (strNumber) << endl;
+  while (strNumber != "q"){
+    switch (getBase (strNumber)){
+      case DECIMAL_BASE: 
+          cout << "The binary conversion is: " << decimalToBinary (strNumber)
+               << endl;
+          cout << "The hexadecimal conversion is: " << decimalToHex (strNumber)
+               << endl;
+          break;
+      case BINARY_BASE:
+          cout << "The decimal conversion is: " << binaryToDecimal (strNumber)
+               << endl;
+          cout << "The hexadecimal conversion is: " << binaryToHex (strNumber)
+               << endl;
+          break;
+      case HEX_BASE:
+          cout << "The decimal conversion is: " << hexToDecimal (strNumber)
+               << endl;
+          cout << "The binary conversion is: " << hexToBinary (strNumber)
+               << endl;
+          break;
+    }
+
+    cout << endl;
+    strNumber = getNumber (USER_PROMPT);
   }
   
   return EXIT_SUCCESS;
